@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Hub - Fournisseur de solutions NFC & RFID en Algérie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <header class="bg-blue-900 text-white p-6 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">RFID Hub</h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#catalogue" class="hover:text-blue-300">Catalogue</a>
+                <a href="#compatibilite" class="hover:text-blue-300">Compatibilité</a>
+                <a href="#devis" class="hover:text-blue-300 font-bold">Demander un Devis</a>
+            </nav>
+        </div>
+    </header>
+    <section class="max-w-6xl mx-auto py-16 px-6 text-center">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Votre Hub Central pour Cartes et Badges RFID 13.56 MHz</h2>
+        <p class="text-xl text-gray-600 mb-8">Zéro délai douanier. Facturation en DZD. Livraison express sur les 58 wilayas.</p>
+        <a href="#devis" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition">Estimer mon projet</a>
+    </section>
+    <section id="catalogue" class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <h3 class="text-3xl font-bold mb-8 text-center">Notre Catalogue de Puces (13.56 MHz)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="border rounded-lg p-6 shadow-sm hover:shadow-md"><h4 class="font-bold text-xl mb-2 text-blue-800">MIFARE Classic</h4><p class="text-gray-600 text-sm">1K / 4K. Le standard de l'industrie pour le contrôle d'accès et l'hôtellerie.</p></div>
+                <div class="border rounded-lg p-6 shadow-sm hover:shadow-md"><h4 class="font-bold text-xl mb-2 text-blue-800">MIFARE Ultralight</h4><p class="text-gray-600 text-sm">EV1 / C. Économique, idéal pour les cartes clients jetables.</p></div>
+                <div class="border rounded-lg p-6 shadow-sm hover:shadow-md"><h4 class="font-bold text-xl mb-2 text-blue-800">MIFARE DESFire</h4><p class="text-gray-600 text-sm">EV1/EV2/EV3. Haute sécurité avec cryptographie.</p></div>
+                <div class="border rounded-lg p-6 shadow-sm hover:shadow-md"><h4 class="font-bold text-xl mb-2 text-blue-800">NTAG & Combos</h4><p class="text-gray-600 text-sm">213/215/216. Cartes combo RFID + Piste magnétique.</p></div>
+            </div>
+        </div>
+    </section>
+    <section id="devis" class="bg-gray-200 py-16">
+        <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h3 class="text-2xl font-bold mb-6 text-center">Demander un devis</h3>
+            <form id="devis-form" class="space-y-4">
+                <input type="text" name="entreprise" placeholder="Entreprise / Hôtel" required class="w-full border p-2 rounded">
+                <input type="text" name="nom" placeholder="Nom" required class="w-full border p-2 rounded">
+                <input type="tel" name="telephone" placeholder="WhatsApp" required class="w-full border p-2 rounded">
+                <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded">
+                <select id="serrure-select" name="serrure" class="w-full border p-2 rounded">
+                    <option value="">Système de serrure...</option>
+                    <option value="VingCard">VingCard</option>
+                    <option value="Onity">Onity</option>
+                    <option value="SALTO">SALTO</option>
+                </select>
+                <input type="text" name="type_puce" id="puce-suggeree" readonly class="w-full border p-2 rounded bg-gray-100" placeholder="Puce suggérée...">
+                <input type="number" name="quantite" id="quantite-input" placeholder="Quantité" class="w-full border p-2 rounded">
+                <button type="submit" id="submit-btn" class="w-full bg-blue-900 text-white font-bold py-3 rounded">Envoyer</button>
+            </form>
+        </div>
+    </section>
+    <script>
+        document.getElementById('serrure-select').addEventListener('change', function() {
+            const p = document.getElementById('puce-suggeree');
+            if(this.value === 'VingCard') p.value = 'Ultralight EV1';
+            else if(this.value === 'Onity') p.value = 'MIFARE 1K';
+            else if(this.value === 'SALTO') p.value = 'DESFire EV2';
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() { emailjs.init("_p5Ac_d6ThpTw-kkA"); })();
+        document.getElementById('devis-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            emailjs.sendForm('service_rv7mci5', 'template_b5fkcrf', this).then(() => alert('Envoyé !'));
+        });
+    </script>
+</body>
+</html>
